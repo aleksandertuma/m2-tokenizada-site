@@ -1,5 +1,6 @@
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer"; // novo import
 import "./globals.css";
-import Navbar from "@/components/Navbar"; // ajuste o caminho se necessário
 
 export default function RootLayout({ children }) {
   return (
@@ -7,6 +8,7 @@ export default function RootLayout({ children }) {
       <body>
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );
