@@ -3,25 +3,29 @@
 import Link from "next/link";
 
 interface Props {
-  nome: string;
-  local: string;
-  rentabilidade: string;
-  url: string;
+    titulo: string;
   imagem: string;
-}
+  localizacao: string;
+  rentabilidade: string;
+  href: string;
+};
 
-export default function EmpreendimentoCard({ nome, local, rentabilidade, url, imagem }: Props) {
+export default function EmpreendimentoCard({
+  titulo,
+  imagem,
+  localizacao,
+  rentabilidade,
+  href,
+}: Props) {
   return (
-    <div className="border rounded-lg shadow-md overflow-hidden">
-      <img src={imagem} alt={nome} className="w-full h-48 object-cover" />
-      <div className="p-4">
-        <h3 className="text-xl font-bold">{nome}</h3>
-        <p className="text-gray-600">{local}</p>
-        <p className="text-green-600 font-semibold mt-2">Rentabilidade: {rentabilidade}</p>
-        <Link href={url}>
-          <p className="text-sm mt-4 text-blue-600 hover:underline">Ver detalhes</p>
-        </Link>
-      </div>
+    <div className="border rounded shadow p-4">
+      <img src={imagem} alt={titulo} className="w-full h-40 object-cover rounded" />
+      <h2 className="text-xl font-semibold mt-2">{titulo}</h2>
+      <p className="text-gray-600">{localizacao}</p>
+      <p className="text-green-600 font-bold">{rentabilidade}</p>
+      <a href={href} className="text-blue-500 hover:underline mt-2 inline-block">
+        Ver mais
+      </a>
     </div>
   );
 }
