@@ -1,7 +1,7 @@
 // app/empreendimentos/page.tsx
 "use client";
 
-import EmpreendimentoCard from "../../components/EmpreendimentoCard";
+import EmpreendimentoCard from "../components/EmpreendimentoCard";
 
 export default function EmpreendimentosPage() {
   const empreendimentos = [
