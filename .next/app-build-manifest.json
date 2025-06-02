@@ -1,18 +1,34 @@
 {
   "pages": {
     "/page": [
-      "static/chunks/webpack-bf1a64d1eafd2816.js",
-      "static/chunks/fd9d1056-5fc0659828b82348.js",
-      "static/chunks/596-686cfb59dc1bc447.js",
-      "static/chunks/main-app-dae2a03f15a44509.js",
-      "static/chunks/app/page-e95d385d8c5cfa18.js"
+      "static/chunks/webpack-a8ba63f2417b26c7.js",
+      "static/chunks/fd9d1056-44040d0b77496165.js",
+      "static/chunks/596-a0001fdcbfc1e086.js",
+      "static/chunks/main-app-b70edc9a4a488cb4.js",
+      "static/chunks/176-be4ec2e2c569461d.js",
+      "static/chunks/app/page-53e77e441fa91fe1.js"
     ],
     "/layout": [
-      "static/chunks/webpack-bf1a64d1eafd2816.js",
-      "static/chunks/fd9d1056-5fc0659828b82348.js",
-      "static/chunks/596-686cfb59dc1bc447.js",
-      "static/chunks/main-app-dae2a03f15a44509.js",
-      "static/chunks/app/layout-60abc94b4e2e6065.js"
+      "static/chunks/webpack-a8ba63f2417b26c7.js",
+      "static/chunks/fd9d1056-44040d0b77496165.js",
+      "static/chunks/596-a0001fdcbfc1e086.js",
+      "static/chunks/main-app-b70edc9a4a488cb4.js",
+      "static/chunks/app/layout-3711000706defb58.js"
+    ],
+    "/marketplace/page": [
+      "static/chunks/webpack-a8ba63f2417b26c7.js",
+      "static/chunks/fd9d1056-44040d0b77496165.js",
+      "static/chunks/596-a0001fdcbfc1e086.js",
+      "static/chunks/main-app-b70edc9a4a488cb4.js",
+      "static/chunks/app/marketplace/page-8bf52522d3617400.js"
+    ],
+    "/empreendimentos/helena-garden/page": [
+      "static/chunks/webpack-a8ba63f2417b26c7.js",
+      "static/chunks/fd9d1056-44040d0b77496165.js",
+      "static/chunks/596-a0001fdcbfc1e086.js",
+      "static/chunks/main-app-b70edc9a4a488cb4.js",
+      "static/chunks/254-2a274cd4bb8d1a13.js",
+      "static/chunks/app/empreendimentos/helena-garden/page-42f2c5c1ce24c28a.js"
     ]
   }
 }

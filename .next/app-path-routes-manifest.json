@@ -1,3 +1,5 @@
 {
-  "/page": "/"
+  "/page": "/",
+  "/marketplace/page": "/marketplace",
+  "/empreendimentos/helena-garden/page": "/empreendimentos/helena-garden"
 }
