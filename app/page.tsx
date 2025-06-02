@@ -13,7 +13,7 @@ export default function HomePage() {
           Investimentos imobiliários de forma digital e acessível.
         </p>
         <div className="flex justify-center gap-4">
-          <Link href="/HELENA GARDEN">
+          <Link href="/empreendimentos/helena-garden">
             <Button className="bg-green-600 hover:bg-green-700 text-white">
               Ver Helena Garden
             </Button>
