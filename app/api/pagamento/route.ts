@@ -24,9 +24,9 @@ export async function POST(req: Request) {
         },
       ],
       back_urls: {
-        success: "https://seusite.com/sucesso",
-        failure: "https://seusite.com/erro",
-      },
+  success: "https://m2-tokenizada-site-teste01.vercel.app/sucesso",
+  failure: "https://m2-tokenizada-site-teste01.vercel.app/erro",
+},
       auto_return: "approved",
     }),
   });
