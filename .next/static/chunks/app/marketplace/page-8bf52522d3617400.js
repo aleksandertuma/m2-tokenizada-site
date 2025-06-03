@@ -1,9 +1,0 @@
-(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[240],{4871:function(e,r,n){Promise.resolve().then(n.bind(n,7457))},7457:function(e,r,n){"use strict";n.r(r),n.d(r,{default:function(){return s}});var t=n(7437);function s(){return(0,t.jsxs)("main",{className:"max-w-6xl mx-auto px-4 py-10",children:[(0,t.jsx)("h1",{className:"text-3xl font-bold mb-4",children:"Marketplace de Tokens"}),(0,t.jsx)("p",{className:"text-gray-700 mb-6",children:"Aqui voc\xea pode encontrar tokens dispon\xedveis para compra ou venda."}),(0,t.jsx)("div",{className:"grid grid-cols-1 md:grid-cols-2 gap-6",children:(0,t.jsxs)("div",{className:"border rounded p-4 shadow",children:[(0,t.jsx)("h2",{className:"text-xl font-semibold",children:"Helena Garden"}),(0,t.jsx)("p",{className:"text-sm text-gray-600",children:"R$ 100,00 por token"}),(0,t.jsx)("button",{className:"mt-2 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700",children:"Comprar"})]})})]})}},622:function(e,r,n){"use strict";/**
- * @license React
- * react-jsx-runtime.production.min.js
- *
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */var t=n(2265),s=Symbol.for("react.element"),o=(Symbol.for("react.fragment"),Object.prototype.hasOwnProperty),a=t.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactCurrentOwner,c={key:!0,ref:!0,__self:!0,__source:!0};function l(e,r,n){var t,l={},i=null,d=null;for(t in void 0!==n&&(i=""+n),void 0!==r.key&&(i=""+r.key),void 0!==r.ref&&(d=r.ref),r)o.call(r,t)&&!c.hasOwnProperty(t)&&(l[t]=r[t]);if(e&&e.defaultProps)for(t in r=e.defaultProps)void 0===l[t]&&(l[t]=r[t]);return{$$typeof:s,type:e,key:i,ref:d,props:l,_owner:a.current}}r.jsx=l,r.jsxs=l},7437:function(e,r,n){"use strict";e.exports=n(622)}},function(e){e.O(0,[971,596,744],function(){return e(e.s=4871)}),_N_E=e.O()}]);

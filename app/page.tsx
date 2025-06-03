@@ -2,22 +2,22 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "./components/ui/button";
+import { Button } from "@/components/ui/Button";
 
 export default function HomePage() {
   return (
     <main className="max-w-6xl mx-auto px-4 py-10 space-y-16">
       <section className="text-center space-y-6">
-        <h1 className="text-4xl font-bold">Bem-vindo à M2 Tokenizada</h1>
+        <h1 className="text-4xl font-bold">Bem-vindo à M2 Tokenizado</h1>
         <p className="text-lg text-gray-600">
           Investimentos imobiliários de forma digital e acessível.
         </p>
         <div className="flex justify-center gap-4">
-          <Link href="/empreendimentos/helena-garden">
-            <Button className="bg-green-600 hover:bg-green-700 text-white">
-              Ver Helena Garden
-            </Button>
-          </Link>
+          <Link href="/conversao">
+  <Button className="bg-green-600 hover:bg-green-700 text-white">
+    Investir Agora
+  </Button>
+</Link>
         </div>
       </section>
 

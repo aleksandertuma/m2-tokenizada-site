@@ -1,4 +1,3 @@
-// app/sobre-a-m2/page.tsx
 "use client";
 
 export default function SobrePage() {

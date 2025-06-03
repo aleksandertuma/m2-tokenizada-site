@@ -1,10 +1,15 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer"; // novo import
-import "./globals.css";
+import "@/styles/globals.css";
+import type { ReactNode } from "react";
 
-export default function RootLayout({ children }) {
+type RootLayoutProps = {
+  children: ReactNode;
+};
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="pt">
+   <html lang="pt">
       <body>
         <Navbar />
         {children}
