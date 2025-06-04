@@ -1,20 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import Image from "next/image";
-import { Button } from "../../../components/ui/Button";
+import { Button } from "@/components/ui/Button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { empreendimentos } from "@/data/empreendimentos";
+import { Empreendimento } from "@/types/empreendimento";
 
-// Banco de dados simulado
-const empreendimentoData = {
-  nome: "Helena Garden",
-  totalTokens: 5000,
-  tokensVendidos: 250,
-  tokenPrice: 100,
-  rentabilidade: "15% a.a.",
-  investimentoMinimo: 500,
-  localizacao: "Praia do Canto, Vitória/ES",
-};
+// Encontra o empreendimento com id 'helena'
+const empreendimentoData = empreendimentos.find((e) => e.id === "helena") as Empreendimento;
 
 const carouselImages = ["/helena1.jpg", "/helena2.jpg", "/helena3.jpg"];
 const obraImages = ["/obra1.jpg", "/obra2.jpg", "/obra3.jpg"];
@@ -22,8 +16,17 @@ const obraImages = ["/obra1.jpg", "/obra2.jpg", "/obra3.jpg"];
 export default function HelenaGardenPage() {
   const [slide, setSlide] = useState(0);
 
-  const tokensDisponiveis =
-    empreendimentoData.totalTokens - empreendimentoData.tokensVendidos;
+const [tokensDisponiveis, setTokensDisponiveis] = useState<number | null>(null);
+
+useEffect(() => {
+  const fetchTokens = async () => {
+    const res = await fetch("/api/tokens-disponiveis");
+    const data = await res.json();
+    const tokenData = data.find((e: any) => e.id === "helena");
+    setTokensDisponiveis(tokenData?.tokensDisponiveis ?? 0);
+  };
+  fetchTokens();
+}, []);
 
   const next = () => setSlide((slide + 1) % carouselImages.length);
   const prev = () => setSlide((slide - 1 + carouselImages.length) % carouselImages.length);
@@ -48,17 +51,26 @@ export default function HelenaGardenPage() {
       <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-4">
           <h2 className="text-2xl font-bold">{empreendimentoData.nome}</h2>
-          <p className="text-gray-600">Empreendimento de alto padrão localizado na {empreendimentoData.localizacao}.</p>
+          <p className="text-gray-600">{empreendimentoData.descricao}</p>
           <ul className="list-disc pl-5 text-sm text-gray-700 space-y-1">
-            <li>Rentabilidade esperada: {empreendimentoData.rentabilidade}</li>
-            <li>Valor do token: R$ {empreendimentoData.tokenPrice.toFixed(2)}</li>
+            <li>Rentabilidade esperada: {empreendimentoData.retornoAnual}</li>
+            <li>Valor do token: R$ {empreendimentoData.precoToken.toFixed(2)}</li>
             <li>Investimento mínimo: R$ {empreendimentoData.investimentoMinimo}</li>
             <li>Remuneração trimestral via wallet</li>
             <li className="font-semibold">Tokens disponíveis: {tokensDisponiveis}</li>
           </ul>
-          <Button className="mt-4 bg-green-600 hover:bg-green-700 text-white">
-            {tokensDisponiveis > 0 ? "Investir Agora" : "Vendas Encerradas"}
-          </Button>
+          {tokensDisponiveis > 0 ? (
+  <a
+    href={`/conversao?id=${empreendimentoData.id}`}
+    className="inline-block mt-4 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-center"
+  >
+    Investir Agora
+  </a>
+) : (
+  <Button className="mt-4 bg-gray-400 text-white cursor-not-allowed" disabled>
+    Vendas Encerradas
+  </Button>
+)}
         </div>
       </section>
 
@@ -78,7 +90,7 @@ export default function HelenaGardenPage() {
       <section>
         <h3 className="text-xl font-semibold mb-4">Localização</h3>
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3675.07046538066!2d-40.290225685037694!3d-20.31285348637181!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb817c217d762ed%3A0x3200a7c2c973307b!2sPraia%20do%20Canto!5e0!3m2!1spt-BR!2sbr!4v1685473895804!5m2!1spt-BR!2sbr"
+          src={empreendimentoData.mapa}
           width="100%"
           height="300"
           style={{ border: 0 }}

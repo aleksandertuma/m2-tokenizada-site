@@ -4,14 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button"; 
 
-import HeroCarousel from "@/components/HeroCarousel";
-import HowItWorks from "@/components/HowItWorks";
-import AudienceOptions from "@/components/AudienceOptions";
-import TestimonialsCarousel from "@/components/TestimonialsCarousel";
-import InvestmentStats from "@/components/InvestmentStats";
-import BlockchainSection from "@/components/BlockchainSection";
-import ContactForm from "@/components/ContactForm";
-import FooterNav from "@/components/FooterNav";
+import HeroCarousel from "@/components/Outros/HeroCarousel";
+import HowItWorks from "@/components/Outros/HowItWorks";
+import AudienceOptions from "@/components/Outros/AudienceOptions";
+import TestimonialsCarousel from "@/components/Outros/TestimonialsCarousel";
+import InvestmentStats from "@/components/Outros/InvestmentStats";
+import BlockchainSection from "@/components/Outros/BlockchainSection";
+import ContactForm from "@/components/Outros/ContactForm";
+import FooterNav from "@/components/Outros/FooterNav";
 
 export default function HomePage() {
   return (

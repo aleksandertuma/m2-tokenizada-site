@@ -1,5 +1,5 @@
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer"; // novo import
+import Navbar from "@/components/Outros/Navbar";
+import Footer from "@/components/Outros/Footer"; // novo import
 import "@/styles/globals.css";
 import type { ReactNode } from "react";
 

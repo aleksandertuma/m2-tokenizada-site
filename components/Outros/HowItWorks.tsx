@@ -1,4 +1,4 @@
-import { Icons } from "@/components/icons";
+import { Icons } from "@/components/Outros/icons";
 
 export default function HowItWorks() {
   const steps = [

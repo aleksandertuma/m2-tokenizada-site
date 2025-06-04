@@ -1,18 +1,51 @@
 "use client";
 
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import EmpreendimentoSelector from "@/components/conversao/EmpreendimentoSelector";
 import InvestimentoInfo from "@/components/conversao/InvestimentoInfo";
 import TokenSimulator from "@/components/conversao/TokenSimulator";
 import InvestForm from "@/components/conversao/InvestForm";
 import InvestButton from "@/components/conversao/InvestButton";
-import CheckoutButton from "@/components/conversao/CheckoutButton";
-
-import { empreendimentos } from "@/data/empreendimentos";
+import { Empreendimento } from "@/types/empreendimento";
+import { useSearchParams } from "next/navigation";
 
 export default function ConversaoPage() {
-  const [selectedId, setSelectedId] = useState(empreendimentos[0].id);
-  const empreendimento = empreendimentos.find((e) => e.id === selectedId)!;
+  const [empreendimentos, setEmpreendimentos] = useState<Empreendimento[]>([]);
+const searchParams = useSearchParams();
+const idFromUrl = searchParams.get("id");
+
+const [selectedId, setSelectedId] = useState<string>("");
+
+useEffect(() => {
+  async function fetchData() {
+    const response = await fetch("/api/empreendimentos");
+    const data = await response.json();
+    setEmpreendimentos(data);
+
+    if (idFromUrl && data.find((e: Empreendimento) => e.id === idFromUrl)) {
+      setSelectedId(idFromUrl);
+    } else {
+      setSelectedId(data[0]?.id || "");
+    }
+  }
+
+  fetchData();
+}, [idFromUrl]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch("/api/empreendimentos");
+      const data = await response.json();
+      setEmpreendimentos(data);
+      setSelectedId(data[0]?.id || "");
+    }
+
+    fetchData();
+  }, []);
+
+  const empreendimento = empreendimentos.find((e) => e.id === selectedId);
+
+  if (!empreendimento) return <p className="text-center p-4">Carregando dados...</p>;
 
   return (
     <main className="max-w-3xl mx-auto p-4">
@@ -26,19 +59,19 @@ export default function ConversaoPage() {
 
       <InvestimentoInfo
         nome={empreendimento.nome}
-        retornoAnual={empreendimento.retorno}
-        indiceCorrecao={empreendimento.indice}
+        retornoAnual={empreendimento.retornoAnual}
+        indiceCorrecao={empreendimento.indiceCorrecao}
         descricao={empreendimento.descricao}
       />
 
       <TokenSimulator
-        precoToken={empreendimento.preco}
-        retornoAnual={parseFloat(empreendimento.retorno.replace("%", ""))}
+        precoToken={empreendimento.precoToken}
+        retornoAnual={empreendimento.retornoNumerico}
       />
 
       <InvestForm />
 
-<InvestButton nome={empreendimento.nome} precoToken={empreendimento.preco} />
+      <InvestButton nome={empreendimento.nome} precoToken={empreendimento.precoToken} />
     </main>
   );
 }

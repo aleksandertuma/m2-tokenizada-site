@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
-import CadastrarVendaTokenForm from "@/components/CadastrarVendaTokenForm";
+import CadastrarVendaTokenForm from "@/components/Outros/CadastrarVendaTokenForm";
 
 export default function AreaDoCliente() {
   const empreendimentos = [
