@@ -5,19 +5,31 @@ import Image from "next/image";
 import { Button } from "../../../components/ui/Button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
-// Simulação de imagens e dados
+// Banco de dados simulado
+const empreendimentoData = {
+  nome: "Helena Garden",
+  totalTokens: 5000,
+  tokensVendidos: 250,
+  tokenPrice: 100,
+  rentabilidade: "15% a.a.",
+  investimentoMinimo: 500,
+  localizacao: "Praia do Canto, Vitória/ES",
+};
+
 const carouselImages = ["/helena1.jpg", "/helena2.jpg", "/helena3.jpg"];
 const obraImages = ["/obra1.jpg", "/obra2.jpg", "/obra3.jpg"];
 
 export default function HelenaGardenPage() {
   const [slide, setSlide] = useState(0);
 
+  const tokensDisponiveis =
+    empreendimentoData.totalTokens - empreendimentoData.tokensVendidos;
+
   const next = () => setSlide((slide + 1) % carouselImages.length);
   const prev = () => setSlide((slide - 1 + carouselImages.length) % carouselImages.length);
 
   return (
     <main className="max-w-6xl mx-auto px-4 py-10 space-y-16">
-
       {/* Carrossel de Imagens */}
       <section className="relative w-full h-[400px] bg-gray-100 rounded-xl overflow-hidden">
         <Image
@@ -35,15 +47,18 @@ export default function HelenaGardenPage() {
       {/* Informações para Investidor */}
       <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-4">
-          <h2 className="text-2xl font-bold">Helena Garden</h2>
-          <p className="text-gray-600">Empreendimento de alto padrão localizado na Praia do Canto, Vitória/ES.</p>
+          <h2 className="text-2xl font-bold">{empreendimentoData.nome}</h2>
+          <p className="text-gray-600">Empreendimento de alto padrão localizado na {empreendimentoData.localizacao}.</p>
           <ul className="list-disc pl-5 text-sm text-gray-700 space-y-1">
-            <li>Rentabilidade esperada: 15% a.a.</li>
-            <li>Valor do token: R$ 100,00</li>
-            <li>Investimento mínimo: R$ 500</li>
+            <li>Rentabilidade esperada: {empreendimentoData.rentabilidade}</li>
+            <li>Valor do token: R$ {empreendimentoData.tokenPrice.toFixed(2)}</li>
+            <li>Investimento mínimo: R$ {empreendimentoData.investimentoMinimo}</li>
             <li>Remuneração trimestral via wallet</li>
+            <li className="font-semibold">Tokens disponíveis: {tokensDisponiveis}</li>
           </ul>
-          <Button className="mt-4 bg-green-600 hover:bg-green-700 text-white">Investir Agora</Button>
+          <Button className="mt-4 bg-green-600 hover:bg-green-700 text-white">
+            {tokensDisponiveis > 0 ? "Investir Agora" : "Vendas Encerradas"}
+          </Button>
         </div>
       </section>
 

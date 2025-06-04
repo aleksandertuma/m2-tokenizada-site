@@ -1,53 +1,90 @@
-'use client';
+"use client";
 
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/ui/Button";
-import { useEffect } from "react";
 
 const images = [
-  "/carrossel1.jpg",
-  "/carrossel2.jpg",
-  "/carrossel3.jpg",
+  "/carousel1.jpg",
+  "/carousel2.jpg",
+  "/carousel3.jpg",
 ];
 
 export default function HeroCarousel() {
+  const [current, setCurrent] = useState(0);
+
+  // Avança automaticamente a cada 6s
   useEffect(() => {
-    let index = 0;
     const interval = setInterval(() => {
-      const slider = document.getElementById("carousel-img") as HTMLImageElement;
-      if (slider) {
-        index = (index + 1) % images.length;
-        slider.src = images[index];
-      }
-    }, 5000);
+      setCurrent((prev) => (prev + 1) % images.length);
+    }, 6000);
     return () => clearInterval(interval);
   }, []);
 
+  const nextSlide = () => {
+    setCurrent((prev) => (prev + 1) % images.length);
+  };
+
+  const prevSlide = () => {
+    setCurrent((prev) => (prev - 1 + images.length) % images.length);
+  };
+
   return (
-    <div className="relative h-[80vh] w-full">
-      <img
-        id="carousel-img"
-        src={images[0]}
-        alt="Banner"
-        className="w-full h-full object-cover transition-all duration-700"
-      />
-      <div className="absolute inset-0 bg-black/50 flex flex-col justify-center items-center text-center text-white px-4">
-        <h1 className="text-3xl md:text-5xl font-bold max-w-3xl">
-          Invista em Imóveis a partir de R$1.000,00
-        </h1>
-        <p className="text-lg mt-4 mb-6 max-w-xl">
-          A solidez de uma obra real. A inovação de investir com um clique.
-        </p>
-        <div className="flex gap-4">
-          <Button className="bg-green-500 text-white hover:bg-green-600 text-lg px-6 py-3">
-            Invista Agora
-          </Button>
-          <a href="#como-funciona">
-            <Button variant="outline" className="text-white border-white hover:bg-white hover:text-black text-lg px-6 py-3">
-              Saiba Mais
-            </Button>
-          </a>
+    <section className="relative w-full h-[500px] overflow-hidden">
+      {images.map((src, index) => (
+        <div
+          key={index}
+          className={`absolute inset-0 transition-opacity duration-1000 ${
+            index === current ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          <Image
+            src={src}
+            alt={`Slide ${index + 1}`}
+            layout="fill"
+            objectFit="cover"
+            className="z-0"
+          />
+          {index === current && (
+            <div className="absolute inset-0 bg-black/40 z-10 flex flex-col items-center justify-center text-center px-4">
+              <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+                Invista em Imóveis a partir de R$1.000,00.
+              </h2>
+              <p className="text-white text-lg mb-6">
+                A solidez de uma obra real. A inovação de investir com um clique.
+              </p>
+              <div className="flex gap-4">
+                <Link href="/conversao">
+                  <Button className="bg-green-600 hover:bg-green-700 text-white">
+                    Invista Agora
+                  </Button>
+                </Link>
+                <a href="#como-funciona">
+                  <Button variant="outline" className="text-white border-white">
+                    Saiba Mais
+                  </Button>
+                </a>
+              </div>
+            </div>
+          )}
         </div>
-      </div>
-    </div>
+      ))}
+
+      {/* Setas de navegação */}
+      <button
+        onClick={prevSlide}
+        className="absolute top-1/2 left-4 z-20 transform -translate-y-1/2 text-white text-3xl"
+      >
+        ‹
+      </button>
+      <button
+        onClick={nextSlide}
+        className="absolute top-1/2 right-4 z-20 transform -translate-y-1/2 text-white text-3xl"
+      >
+        ›
+      </button>
+    </section>
   );
 }
+

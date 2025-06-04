@@ -27,7 +27,6 @@ export default function Navbar() {
           {/* Links visíveis apenas no desktop */}
           <div className="hidden md:flex md:space-x-6 text-sm font-medium">
             <Link href="/">Home</Link>
-            <Link href="/como-funciona">Como Funciona</Link>
             <Link href="/sobre-a-m2">Sobre a M2</Link>
             <Link href="/para-seu-negocio">Para Seu Negócio</Link>
             <Link href="/empreendimentos">Empreendimentos</Link>

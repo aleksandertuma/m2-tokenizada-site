@@ -8,26 +8,7 @@ import InvestForm from "@/components/conversao/InvestForm";
 import InvestButton from "@/components/conversao/InvestButton";
 import CheckoutButton from "@/components/conversao/CheckoutButton";
 
-const empreendimentos = [
-  {
-    id: "helena",
-    nome: "Helena Garden",
-    retornoAnual: "12%",
-    indiceCorrecao: "IPCA + 6%",
-    descricao: "Empreendimento localizado em Bento Ferreira com studios modernos.",
-    precoToken: 100,
-    retornoNumerico: 12,
-  },
-  {
-    id: "ilha",
-    nome: "Ilha do Boi Exclusive",
-    retornoAnual: "15%",
-    indiceCorrecao: "IGP-M + 4%",
-    descricao: "Casas de alto padrão na Ilha do Boi com vista privilegiada.",
-    precoToken: 200,
-    retornoNumerico: 15,
-  },
-];
+import { empreendimentos } from "@/data/empreendimentos";
 
 export default function ConversaoPage() {
   const [selectedId, setSelectedId] = useState(empreendimentos[0].id);
@@ -45,19 +26,19 @@ export default function ConversaoPage() {
 
       <InvestimentoInfo
         nome={empreendimento.nome}
-        retornoAnual={empreendimento.retornoAnual}
-        indiceCorrecao={empreendimento.indiceCorrecao}
+        retornoAnual={empreendimento.retorno}
+        indiceCorrecao={empreendimento.indice}
         descricao={empreendimento.descricao}
       />
 
       <TokenSimulator
-        precoToken={empreendimento.precoToken}
-        retornoAnual={empreendimento.retornoNumerico}
+        precoToken={empreendimento.preco}
+        retornoAnual={parseFloat(empreendimento.retorno.replace("%", ""))}
       />
 
       <InvestForm />
 
-      <InvestButton />
+<InvestButton nome={empreendimento.nome} precoToken={empreendimento.preco} />
     </main>
   );
 }

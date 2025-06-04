@@ -2,7 +2,12 @@
 
 import React from "react";
 
-const InvestButton: React.FC = () => {
+interface InvestButtonProps {
+  nome: string;
+  precoToken: number;
+}
+
+const InvestButton: React.FC<InvestButtonProps> = ({ nome, precoToken }) => {
   const handleInvest = async () => {
     try {
       const response = await fetch("/api/pagamento", {
@@ -11,16 +16,16 @@ const InvestButton: React.FC = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          title: "Token Helena Garden",
+          title: `Token ${nome}`,
           quantity: 1,
-          price: 100, // valor unitário do token em reais
+          price: precoToken,
         }),
       });
 
       const data = await response.json();
 
       if (data.init_point) {
-        window.location.href = data.init_point; // redireciona para o pagamento
+        window.location.href = data.init_point;
       } else {
         alert("Erro ao gerar link de pagamento.");
       }

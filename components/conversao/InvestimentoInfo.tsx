@@ -17,14 +17,12 @@ const InvestimentoInfo: React.FC<InvestimentoInfoProps> = ({
 }) => {
   return (
     <div className="bg-white p-4 rounded-md shadow mb-4">
-      <h2 className="text-xl font-semibold mb-2">{nome}</h2>
-      <p className="text-gray-600 mb-1">
-        <strong>Retorno Anual:</strong> {retornoAnual}
-      </p>
-      <p className="text-gray-600 mb-1">
-        <strong>Índice de Correção:</strong> {indiceCorrecao}
-      </p>
-      <p className="text-gray-700">{descricao}</p>
+      <h2 className="text-2xl font-bold text-green-700 mb-2">{nome}</h2>
+      <div className="text-gray-700 space-y-1">
+        <p><strong>📈 Retorno Anual:</strong> {retornoAnual}</p>
+        <p><strong>📊 Índice de Correção:</strong> {indiceCorrecao}</p>
+        <p>{descricao}</p>
+      </div>
     </div>
   );
 };

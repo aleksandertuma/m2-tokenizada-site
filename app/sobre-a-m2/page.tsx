@@ -1,45 +1,69 @@
+// app/sobre-a-m2/page.tsx
+
 "use client";
 
-export default function SobrePage() {
+import Image from "next/image";
+
+export default function SobreAM2() {
   return (
-    <main className="max-w-6xl mx-auto px-4 py-10 space-y-16">
-      
-      {/* Cabeçalho */}
-      <section className="text-center">
+    <main className="max-w-6xl mx-auto px-4 py-16 space-y-16">
+      <section className="text-center space-y-4">
         <h1 className="text-4xl font-bold">Sobre a M2 Tokenizada</h1>
-        <p className="mt-4 text-gray-600 text-lg">
-          Uma nova forma de investir em imóveis com tecnologia e confiança.
+        <p className="text-gray-600 text-lg">
+          Somos uma startup que transforma o mercado imobiliário com tecnologia,
+          acessibilidade e total transparência.
         </p>
       </section>
 
-      {/* Missão, Visão e Valores */}
-      <section className="grid md:grid-cols-3 gap-8 text-center">
-        <div>
-          <h2 className="text-2xl font-semibold">Missão</h2>
-          <p className="text-gray-700 mt-2">
-            Democratizar o acesso ao mercado imobiliário com segurança, inovação e rentabilidade.
+      <section className="grid md:grid-cols-2 gap-10 items-center">
+        <div className="space-y-4">
+          <h2 className="text-2xl font-semibold">Inovação e Acesso</h2>
+          <p className="text-gray-700">
+            Através da tokenização, tornamos possível que qualquer pessoa invista no setor
+            imobiliário com valores a partir de R$ 500, de forma simples e digital.
           </p>
         </div>
-        <div>
-          <h2 className="text-2xl font-semibold">Visão</h2>
-          <p className="text-gray-700 mt-2">
-            Ser referência nacional em investimentos imobiliários tokenizados.
-          </p>
-        </div>
-        <div>
-          <h2 className="text-2xl font-semibold">Valores</h2>
-          <p className="text-gray-700 mt-2">
-            Ética, transparência, inovação e compromisso com o investidor.
+        <Image
+          src="/images/inovação1.jpg"
+          alt="Inovação no mercado imobiliário"
+          width={600}
+          height={400}
+          className="rounded-xl shadow"
+        />
+      </section>
+
+      <section className="grid md:grid-cols-2 gap-10 items-center">
+        <Image
+          src="/images/segurançaobra1.jpg"
+          alt="Segurança e confiabilidade"
+          width={600}
+          height={400}
+          className="rounded-xl shadow"
+        />
+        <div className="space-y-4">
+          <h2 className="text-2xl font-semibold">Segurança e Transparência</h2>
+          <p className="text-gray-700">
+            Toda operação é registrada em blockchain, garantindo segurança, rastreabilidade
+            e total transparência para os investidores.
           </p>
         </div>
       </section>
 
-      {/* Sobre a empresa */}
-      <section className="text-center bg-gray-100 p-10 rounded-lg">
-        <h2 className="text-2xl font-bold mb-4">Quem Somos</h2>
-        <p className="text-gray-700 max-w-3xl mx-auto">
-          A M2 Tokenizada é uma iniciativa da Tuma Construtora e Incorporadora com o objetivo de aproximar pessoas de oportunidades reais de investimento no mercado imobiliário, utilizando blockchain como garantia de segurança e transparência.
-        </p>
+      <section className="grid md:grid-cols-2 gap-10 items-center">
+        <div className="space-y-4">
+          <h2 className="text-2xl font-semibold">Nosso Propósito</h2>
+          <p className="text-gray-700">
+            Democratizar o investimento em imóveis e permitir que todos tenham acesso a
+            projetos de alto padrão e rendimento atrativo.
+          </p>
+        </div>
+        <Image
+          src="/images/proposito1.jpg"
+          alt="Propósito da empresa"
+          width={600}
+          height={400}
+          className="rounded-xl shadow"
+        />
       </section>
     </main>
   );

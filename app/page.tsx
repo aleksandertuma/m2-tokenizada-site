@@ -16,57 +16,72 @@ import FooterNav from "@/components/FooterNav";
 export default function HomePage() {
   return (
     <>
-      {/* Hero inicial com carrossel */}
       <HeroCarousel />
 
-      {/* Seção complementar do seu texto atual */}
-      <main className="max-w-6xl mx-auto px-4 py-20 space-y-16">
-        <section className="text-center space-y-6">
-          <h1 className="text-4xl font-bold">Bem-vindo à M2 Tokenizada</h1>
-          <p className="text-lg text-gray-600">
-            Investimentos imobiliários de forma digital e acessível.
+<section className="max-w-6xl mx-auto px-4 py-20 grid md:grid-cols-3 gap-8">
+        <div className="space-y-3 text-center">
+          <Image
+            src="/images/token.jpg"
+            alt="Inovação no mercado"
+            width={400}
+            height={300}
+            className="rounded-xl mx-auto shadow"
+          />
+          <h3 className="text-xl font-semibold">Inovação</h3>
+          <p className="text-gray-600 text-sm">
+            A tokenização traz o futuro do mercado imobiliário para o presente.
           </p>
-          <div className="flex justify-center gap-4">
-            <Link href="/conversao">
-              <Button className="bg-green-600 hover:bg-green-700 text-white">
-                Investir Agora
-              </Button>
-            </Link>
-          </div>
-        </section>
+        </div>
 
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <h2 className="text-2xl font-semibold">Transparência</h2>
-            <p className="text-gray-700">
-              Acompanhe o progresso das obras, remuneração e todos os dados do seu token.
-            </p>
-          </div>
-          <div>
-            <h2 className="text-2xl font-semibold">Baixo Valor Inicial</h2>
-            <p className="text-gray-700">
-              Comece a investir com apenas R$ 500,00 e receba lucros trimestrais.
-            </p>
-          </div>
-        </section>
-
-        <section>
-          <h3 className="text-xl font-semibold mb-4">Nosso Propósito</h3>
-          <p className="text-gray-600">
-            Democratizar o acesso ao mercado imobiliário através da tecnologia de tokenização,
-            criando oportunidades de alto padrão para todos.
+        <div className="space-y-3 text-center">
+          <Image
+            src="/images/segurançadigital3.jpg"
+            alt="Segurança e confiabilidade"
+            width={400}
+            height={300}
+            className="rounded-xl mx-auto shadow"
+          />
+          <h3 className="text-xl font-semibold">Segurança</h3>
+          <p className="text-gray-600 text-sm">
+            Registro em blockchain para garantir rastreabilidade e proteção ao investidor.
           </p>
-        </section>
-      </main>
+        </div>
 
-      {/* Blocos estruturados */}
-      <HowItWorks />
+        <div className="space-y-3 text-center">
+          <Image
+            src="/images/inovação1.jpg"
+            alt="Propósito da empresa"
+            width={400}
+            height={300}
+            className="rounded-xl mx-auto shadow"
+          />
+          <h3 className="text-xl font-semibold">Propósito</h3>
+          <p className="text-gray-600 text-sm">
+            Democratizar o acesso a projetos de alto padrão e rentabilidade.
+          </p>
+        </div>
+      </section>
+
+      {/* Como Funciona */}
+      <section id="como-funciona">
+        <HowItWorks />
+      </section>
+
+      {/* Público-alvo */}
       <AudienceOptions />
+
+      {/* Depoimentos */}
       <TestimonialsCarousel />
+
+      {/* Estatísticas */}
       <InvestmentStats />
+
+      {/* Blockchain */}
       <BlockchainSection />
+
+      {/* Contato */}
       <ContactForm />
-      <FooterNav />
     </>
   );
 }
+
