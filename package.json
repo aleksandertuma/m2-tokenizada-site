@@ -7,6 +7,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@emailjs/nodejs": "^5.0.2",
     "autoprefixer": "^10.4.14",
     "emailjs-com": "^3.2.0",

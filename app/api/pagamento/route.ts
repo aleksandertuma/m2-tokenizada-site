@@ -6,7 +6,7 @@ export async function POST(req: Request) {
 
   const { title, quantity, price } = body;
 
-  const accessToken = "APP_USR-3807204280200512-060221-4d93569998b67010e0fc97b9113c2d40-2255255714";
+const accessToken = process.env.MERCADO_PAGO_ACCESS_TOKEN!;
 
   const response = await fetch("https://api.mercadopago.com/checkout/preferences", {
     method: "POST",

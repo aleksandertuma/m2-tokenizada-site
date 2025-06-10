@@ -1,9 +1,9 @@
 import emailjs from "@emailjs/nodejs";
 
 // ⚠️ Assegure que essas variáveis estejam definidas no painel da Vercel (Settings > Environment Variables)
-const SERVICE_ID = "service_j2pbfcq";
-const TEMPLATE_ID = "template_sxck4x6";
-const PUBLIC_KEY = process.env.EMAILJS_PRIVATE_KEY!;
+const SERVICE_ID = process.env.EMAILJS_SERVICE_ID!;
+const TEMPLATE_ID = process.env.EMAILJS_TEMPLATE_ID!;
+const PUBLIC_KEY = process.env.EMAILJS_PUBLIC_KEY!;
 
 interface EmailPayload {
   nome: string;

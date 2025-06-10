@@ -7,7 +7,7 @@ import { Wallet } from "ethers";
 import { sendEmail } from "@/lib/sendEmail";
 
 // Chave secreta do webhook do Mercado Pago
-const WEBHOOK_SECRET = "049461f45f2eafbee46f21232bea88f96fcd3db7385d55eeca3026152373ab23";
+const WEBHOOK_SECRET = process.env.MERCADO_PAGO_WEBHOOK_SECRET!;
 
 export async function POST(req: Request) {
   const rawBody = await req.text();
@@ -31,12 +31,12 @@ export async function POST(req: Request) {
   const body = JSON.parse(rawBody);
   console.log("✅ Webhook recebido com sucesso:", body);
 
+  // Garante que é um evento de pagamento válido
   if (
-  body.type === "payment" &&
-  body.data &&
-  (body.action === "payment.updated" || body.action === "payment.created")
-)
- {
+    body.type === "payment" &&
+    body.data &&
+    (body.action === "payment.updated" || body.action === "payment.created")
+  ) {
     const paymentId = body.data.id;
 
     try {
@@ -52,6 +52,7 @@ export async function POST(req: Request) {
       const doc = snapshot.docs[0];
       const dados = doc.data();
 
+      // Valida campos obrigatórios
       if (
         !dados.nome ||
         !dados.email ||
@@ -63,9 +64,11 @@ export async function POST(req: Request) {
         return NextResponse.json({ error: "Dados incompletos" }, { status: 400 });
       }
 
+      // Gera senha e carteira
       const senha = uuidv4().slice(0, 8);
       const wallet = Wallet.createRandom();
 
+      // Atualiza Firestore com dados do cliente
       await updateDoc(doc.ref, {
         status: "pago",
         pagamentoConfirmadoEm: Timestamp.now(),
@@ -77,6 +80,7 @@ export async function POST(req: Request) {
 
       console.log("✅ Firestore atualizado com sucesso");
 
+      // Envia e-mail com as informações
       await sendEmail({
         nome: dados.nome,
         email: dados.email,
@@ -89,7 +93,6 @@ export async function POST(req: Request) {
       });
 
       console.log("✅ E-mail enviado com sucesso");
-
     } catch (error) {
       console.error("❌ Erro ao processar webhook:", error);
       return NextResponse.json({ error: "Erro interno" }, { status: 500 });
