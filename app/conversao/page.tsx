@@ -11,37 +11,25 @@ import { useSearchParams } from "next/navigation";
 
 export default function ConversaoPage() {
   const [empreendimentos, setEmpreendimentos] = useState<Empreendimento[]>([]);
-const searchParams = useSearchParams();
-const idFromUrl = searchParams.get("id");
-
-const [selectedId, setSelectedId] = useState<string>("");
-
-useEffect(() => {
-  async function fetchData() {
-    const response = await fetch("/api/empreendimentos");
-    const data = await response.json();
-    setEmpreendimentos(data);
-
-    if (idFromUrl && data.find((e: Empreendimento) => e.id === idFromUrl)) {
-      setSelectedId(idFromUrl);
-    } else {
-      setSelectedId(data[0]?.id || "");
-    }
-  }
-
-  fetchData();
-}, [idFromUrl]);
+  const searchParams = useSearchParams();
+  const idFromUrl = searchParams.get("id");
+  const [selectedId, setSelectedId] = useState<string>("");
 
   useEffect(() => {
     async function fetchData() {
       const response = await fetch("/api/empreendimentos");
       const data = await response.json();
       setEmpreendimentos(data);
-      setSelectedId(data[0]?.id || "");
+
+      if (idFromUrl && data.find((e: Empreendimento) => e.id === idFromUrl)) {
+        setSelectedId(idFromUrl);
+      } else {
+        setSelectedId(data[0]?.id || "");
+      }
     }
 
     fetchData();
-  }, []);
+  }, [idFromUrl]);
 
   const empreendimento = empreendimentos.find((e) => e.id === selectedId);
 
@@ -71,7 +59,10 @@ useEffect(() => {
 
       <InvestForm />
 
-      <InvestButton nome={empreendimento.nome} precoToken={empreendimento.precoToken} />
+      <InvestButton
+        nome={empreendimento.nome}
+        precoToken={empreendimento.precoToken}
+      />
     </main>
   );
 }

@@ -13,6 +13,7 @@ const InvestButton: React.FC<InvestButtonProps> = ({ nome, precoToken }) => {
   const handleInvest = async () => {
     setLoading(true);
 
+    // Coleta de dados do DOM
     const nomeCompleto = (document.getElementById("nome") as HTMLInputElement)?.value;
     const email = (document.getElementById("email") as HTMLInputElement)?.value;
     const telefone = (document.getElementById("telefone") as HTMLInputElement)?.value;
@@ -20,6 +21,7 @@ const InvestButton: React.FC<InvestButtonProps> = ({ nome, precoToken }) => {
     const endereco = (document.getElementById("endereco") as HTMLInputElement)?.value;
     const aceitou = (document.getElementById("termos") as HTMLInputElement)?.checked;
 
+    // Validação
     if (!nomeCompleto || !email || !telefone || !cpf || !endereco || !aceitou) {
       alert("Por favor, preencha todos os campos e aceite os termos.");
       setLoading(false);
@@ -27,7 +29,30 @@ const InvestButton: React.FC<InvestButtonProps> = ({ nome, precoToken }) => {
     }
 
     try {
-      const response = await fetch("/api/pagamento", {
+      // 1. Registrar dados do cliente no Firestore
+      const registro = await fetch("/api/registro", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nome: nomeCompleto,
+          email,
+          telefone,
+          cpf,
+          endereco,
+          empreendimento: nome,
+          quantidadeTokens: 1,
+          aceitouTermos: true,
+        }),
+      });
+
+      if (!registro.ok) {
+        alert("Erro ao registrar dados. Tente novamente.");
+        setLoading(false);
+        return;
+      }
+
+      // 2. Redirecionar para o pagamento via Mercado Pago
+      const pagamento = await fetch("/api/pagamento", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -42,7 +67,7 @@ const InvestButton: React.FC<InvestButtonProps> = ({ nome, precoToken }) => {
         }),
       });
 
-      const data = await response.json();
+      const data = await pagamento.json();
 
       if (data.init_point) {
         window.location.href = data.init_point;
@@ -50,8 +75,8 @@ const InvestButton: React.FC<InvestButtonProps> = ({ nome, precoToken }) => {
         alert("Erro ao gerar link de pagamento.");
       }
     } catch (error) {
-      console.error("Erro no pagamento:", error);
-      alert("Erro ao processar o pagamento.");
+      console.error("Erro ao processar:", error);
+      alert("Erro ao processar. Tente novamente.");
     } finally {
       setLoading(false);
     }
