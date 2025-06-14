@@ -1,15 +1,14 @@
+"use client";
+
 import { useEffect, useState } from "react";
-import { collection, getDocs, query, orderBy, doc, getDoc, updateDoc } from "firebase/firestore";
+import { useRouter } from "next/navigation";
+import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Select } from "@/components/ui/Select";
 import { Button } from "@/components/ui/Button";
-import { repassarPix } from "@/lib/banco/starkbank";
-import { registrarLogRepasse } from "@/lib/logs/logsRepasses";
 
-interface Repasse {
+interface RepasseDetalhado {
   empreendimentoId: string;
   compraId: string;
   valorCentavos: number;
@@ -22,125 +21,52 @@ interface Repasse {
   criadoEm?: { seconds: number; nanoseconds: number };
 }
 
-export default function RepassesPage() {
-  const [repasses, setRepasses] = useState<Repasse[]>([]);
-  const [filtrados, setFiltrados] = useState<Repasse[]>([]);
+export default function RepasseDetalhadoPage({ params }: { params: { compraId: string } }) {
+  const [repasse, setRepasse] = useState<RepasseDetalhado | null>(null);
   const [loading, setLoading] = useState(true);
-  const [statusFiltro, setStatusFiltro] = useState<string>("todos");
-  const [empreendimentoFiltro, setEmpreendimentoFiltro] = useState<string>("todos");
+  const router = useRouter();
 
   useEffect(() => {
-    const fetchRepasses = async () => {
-      const ref = query(collection(db, "repasses"), orderBy("criadoEm", "desc"));
-      const snapshot = await getDocs(ref);
-      const lista: Repasse[] = snapshot.docs.map(doc => doc.data() as Repasse);
-      setRepasses(lista);
-      setFiltrados(lista);
+    const fetchRepasse = async () => {
+      const ref = doc(db, "repasses", params.compraId);
+      const snap = await getDoc(ref);
+      if (snap.exists()) {
+        setRepasse(snap.data() as RepasseDetalhado);
+      }
       setLoading(false);
     };
-    fetchRepasses();
-  }, []);
-
-  useEffect(() => {
-    const filtrados = repasses.filter(repasse => {
-      const statusCond = statusFiltro === "todos" || repasse.status === statusFiltro;
-      const empCond = empreendimentoFiltro === "todos" || repasse.empreendimentoId === empreendimentoFiltro;
-      return statusCond && empCond;
-    });
-    setFiltrados(filtrados);
-  }, [statusFiltro, empreendimentoFiltro, repasses]);
-
-  const empreendimentosUnicos = Array.from(new Set(repasses.map(r => r.empreendimentoId)));
-
-  const handleReprocessar = async (repasse: Repasse) => {
-    try {
-      await repassarPix({
-        valorCentavos: repasse.valorCentavos,
-        chavePix: repasse.chavePix,
-        descricao: repasse.descricao,
-        taxId: repasse.taxId,
-        nomeRecebedor: repasse.nomeRecebedor,
-      });
-
-      await registrarLogRepasse({
-        ...repasse,
-        status: "concluido",
-      });
-
-      await updateDoc(doc(db, "compras", repasse.compraId), {
-        repasseStatus: "concluido",
-      });
-
-      alert("Repasse reprocessado com sucesso!");
-    } catch (erro: any) {
-      await registrarLogRepasse({
-        ...repasse,
-        status: "falhou",
-        erro: erro.message || "Erro desconhecido",
-      });
-
-      alert("Erro ao reprocessar repasse: " + erro.message);
-    }
-  };
+    fetchRepasse();
+  }, [params.compraId]);
 
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Repasses Registrados</h1>
-
-      <div className="flex gap-4 mb-6">
-        <Select onChange={e => setStatusFiltro(e.target.value)} defaultValue="todos">
-          <option value="todos">Todos</option>
-          <option value="concluido">Concluídos</option>
-          <option value="pendente">Pendentes</option>
-          <option value="falhou">Falhos</option>
-        </Select>
-
-        <Select onChange={e => setEmpreendimentoFiltro(e.target.value)} defaultValue="todos">
-          <option value="todos">Todos os Empreendimentos</option>
-          {empreendimentosUnicos.map(emp => (
-            <option key={emp} value={emp}>{emp}</option>
-          ))}
-        </Select>
-      </div>
+      <Button onClick={() => router.back()} className="mb-4">← Voltar</Button>
 
       {loading ? (
         <p>Carregando...</p>
+      ) : repasse ? (
+        <Card className="p-6">
+          <h1 className="text-xl font-bold mb-2">Detalhes do Repasse</h1>
+          <p><strong>Empreendimento:</strong> {repasse.empreendimentoId}</p>
+          <p><strong>Valor:</strong> R$ {(repasse.valorCentavos / 100).toFixed(2)}</p>
+          <p><strong>Chave PIX:</strong> {repasse.chavePix}</p>
+          <p><strong>Recebedor:</strong> {repasse.nomeRecebedor}</p>
+          <p><strong>CPF/CNPJ:</strong> {repasse.taxId}</p>
+          <p><strong>Descrição:</strong> {repasse.descricao}</p>
+          <p><strong>Data:</strong> {repasse.criadoEm ? new Date(repasse.criadoEm.seconds * 1000).toLocaleString() : "—"}</p>
+
+          {repasse.erro && (
+            <p className="text-red-600"><strong>Erro:</strong> {repasse.erro}</p>
+          )}
+
+          <div className="mt-4">
+            <Badge variant={repasse.status === "concluido" ? "default" : repasse.status === "falhou" ? "destructive" : "secondary"}>
+              {repasse.status.toUpperCase()}
+            </Badge>
+          </div>
+        </Card>
       ) : (
-        <div className="space-y-4">
-          {filtrados.map((repasse, index) => (
-            <Link key={index} href={`/admin/repasses/${repasse.compraId}`} className="block">
-              <Card className="p-4 border hover:shadow-md transition">
-                <div className="flex justify-between items-center">
-                  <div>
-                    <h2 className="text-lg font-semibold">{repasse.empreendimentoId}</h2>
-                    <p>Valor: R$ {(repasse.valorCentavos / 100).toFixed(2)}</p>
-                    <p>Chave PIX: {repasse.chavePix}</p>
-                    <p>Recebedor: {repasse.nomeRecebedor}</p>
-                    <p>Descrição: {repasse.descricao}</p>
-                    <p>Data: {repasse.criadoEm ? new Date(repasse.criadoEm.seconds * 1000).toLocaleString() : ""}</p>
-                    {repasse.erro && (
-                      <p className="text-red-600">Erro: {repasse.erro}</p>
-                    )}
-                  </div>
-                  <div className="flex flex-col items-end gap-2">
-                    <Badge variant={repasse.status === "concluido" ? "default" : repasse.status === "falhou" ? "destructive" : "secondary"}>
-                      {repasse.status.toUpperCase()}
-                    </Badge>
-                    {repasse.status === "falhou" && (
-                      <Button size="sm" onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        handleReprocessar(repasse);
-                      }}>
-                        Reprocessar
-                      </Button>
-                    )}
-                  </div>
-                </div>
-              </Card>
-            </Link>
-          ))}
-        </div>
+        <p>Repasse não encontrado.</p>
       )}
     </div>
   );

@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button"; 
-
 import HeroCarousel from "@/components/Outros/HeroCarousel";
 import HowItWorks from "@/components/Outros/HowItWorks";
 import AudienceOptions from "@/components/Outros/AudienceOptions";
