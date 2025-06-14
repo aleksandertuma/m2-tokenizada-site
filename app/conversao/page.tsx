@@ -47,7 +47,7 @@ export default function ConversaoPage() {
 
       <InvestimentoInfo
         nome={empreendimento.nome}
-        retornoAnual={empreendimento.retornoAnual}
+        retornoAnual={empreendimento.percentualRetornoAnual}
         indiceCorrecao={empreendimento.indiceCorrecao}
         descricao={empreendimento.descricao}
       />
