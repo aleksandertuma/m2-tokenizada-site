@@ -4,7 +4,7 @@ import { db } from "@/lib/firebase";
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { select } from "@/components/ui/select";
+import { Select } from "@/components/ui/Select";
 import { Button } from "@/components/ui/Button";
 import { repassarPix } from "@/lib/banco/starkbank";
 import { registrarLogRepasse } from "@/lib/logs/logsRepasses";
@@ -95,7 +95,7 @@ export default function RepassesPage() {
           <option value="falhou">Falhos</option>
         </Select>
 
-        <Select onValueChange={setEmpreendimentoFiltro} defaultValue="todos">
+        <Select onChange={(e) => setEmpreendimentoFiltro(e.target.value)} defaultValue="todos">
           <option value="todos">Todos os Empreendimentos</option>
           {empreendimentosUnicos.map(emp => (
             <option key={emp} value={emp}>{emp}</option>
