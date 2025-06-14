@@ -1,3 +1,5 @@
+// data/empreendimentos.ts
+
 export const empreendimentos = [
   {
     id: "helena",
@@ -20,7 +22,6 @@ export const empreendimentos = [
     descricao: "Empreendimento moderno em localização privilegiada com design sofisticado e alto potencial de valorização.",
   },
 
-  // Exemplo para segundo empreendimento
   {
     id: "boavista",
     nome: "Residencial Boa Vista",

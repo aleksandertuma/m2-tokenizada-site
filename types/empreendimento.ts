@@ -3,12 +3,15 @@ export interface Empreendimento {
   nome: string;
   descricao: string;
   precoToken: number;
-  totalTokens: number;
-  tokensVendidos: number;
-  retornoAnual: string;
-  indiceCorrecao: string;
-  retornoNumerico: number;
-  investimentoMinimo: number;
-  localizacao: string;
-  mapa?: string;
+  quantidadeTotalTokens: number;
+  percentualRetornoAnual: number;
+  percentualM2: number;
+  chavePix: string;
+  taxId: string;
+  nomeRecebedor: string;
+  cnpj: string;
+  cidade: string;
+  etapaObra: string;
+  status: string;
+  imagens: string[];
 }

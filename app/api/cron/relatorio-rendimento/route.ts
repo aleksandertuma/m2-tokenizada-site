@@ -20,7 +20,7 @@ export async function GET() {
       const emp = empreendimentos.find(e => e.id === empreendimento);
       if (!emp) continue;
 
-      const retornoAnual = emp.retornoNumerico || 0;
+      const retornoAnual = emp.percentualRetornoAnual || 0;
       const retornoTrimestral = retornoAnual / 4;
       const rendimento = (quantidadeTokens * retornoTrimestral) / 100;
 
@@ -28,7 +28,7 @@ export async function GET() {
 
       relatorioPorEmail[email].push({
         nome,
-        empreendimento,
+        empreendimento: emp.nome,
         tokens: quantidadeTokens,
         rendimento: rendimento.toFixed(2),
         retornoPercentualTrimestral: retornoTrimestral.toFixed(2),
