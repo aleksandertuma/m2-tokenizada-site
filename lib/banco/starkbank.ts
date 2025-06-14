@@ -1,20 +1,33 @@
-import starkbank from "starkbank";
+// lib/banco/starkbank.ts
+
 import { PixPayment } from "starkbank/dist/pix/payment";
 
-// Inicialização da conta da M2 Tokenizada no Stark Bank
-starkbank.user = new starkbank.Project({
-  id: process.env.STARKBANK_PROJECT_ID!,
-  privateKey: process.env.STARKBANK_PRIVATE_KEY!,
-  environment: "production", // ou "sandbox" se for ambiente de testes
-});
+let starkbank: typeof import("starkbank") | null = null;
+
+// Verifica se as credenciais estão presentes antes de importar
+if (
+  process.env.STARKBANK_PROJECT_ID &&
+  process.env.STARKBANK_PRIVATE_KEY &&
+  process.env.STARKBANK_ENVIRONMENT
+) {
+  starkbank = require("starkbank");
+
+  starkbank.user = new starkbank.Project({
+    id: process.env.STARKBANK_PROJECT_ID!,
+    privateKey: process.env.STARKBANK_PRIVATE_KEY!,
+    environment: process.env.STARKBANK_ENVIRONMENT as "sandbox" | "production",
+  });
+} else {
+  console.warn("⚠️ StarkBank não configurado. Repasse automático será ignorado.");
+}
 
 // Interface esperada
 interface RepassePix {
   valorCentavos: number;
   chavePix: string;
   descricao: string;
-  taxId: string; // CPF ou CNPJ sem pontuação
-  nomeRecebedor: string; // Nome da empresa (para o banco)
+  taxId: string;
+  nomeRecebedor: string;
 }
 
 export async function repassarPix({
@@ -24,11 +37,15 @@ export async function repassarPix({
   taxId,
   nomeRecebedor,
 }: RepassePix) {
+  if (!starkbank) {
+    throw new Error("StarkBank não está configurado no ambiente.");
+  }
+
   try {
     const pagamento: PixPayment = new starkbank.PixPayment({
       amount: valorCentavos,
       keyId: chavePix,
-      taxId: taxId,
+      taxId,
       name: nomeRecebedor,
       description: descricao,
       tags: ["repasse-m2", "automatizado"],
