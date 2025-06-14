@@ -1,11 +1,6 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/firebase";
-import {
-  collection,
-  doc,
-  getDoc,
-  updateDoc,
-} from "firebase/firestore";
+import { collection,doc,getDoc,updateDoc } from "firebase/firestore";
 import { Wallet } from "ethers";
 import { v4 as uuidv4 } from "uuid";
 import { sendEmail } from "@/lib/sendEmail";
