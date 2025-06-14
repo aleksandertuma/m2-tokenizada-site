@@ -2,21 +2,42 @@ export const empreendimentos = [
   {
     id: "helena",
     nome: "Helena Garden",
-    precoToken: 100,
-    totalTokens: 5000,
-    tokensVendidos: 2000,
-    retornoAnual: "12%",
-    indiceCorrecao: "IPCA + 6%",
-    descricao: "Empreendimento localizado em Barro Vermelho, Vitória-ES, alto padrão.",
+    precoToken: 10, // Valor unitário do token
+    quantidadeTotalTokens: 5000, // Estoque total
+    percentualRetornoAnual: 12, // Retorno prometido ao investidor
+    percentualM2: 5, // Comissão da M2 Tokenizada (em %)
+    chavePix: "helena.pix@banco.com.br", // Chave PIX da SPE
+    taxId: "12345678000199", // CNPJ da SPE (sem pontuação)
+    nomeRecebedor: "Helena SPE LTDA", // Nome legal da SPE (aparece no comprovante)
+    cnpj: "12.345.678/0001-99", // Para exibição administrativa
+    cidade: "Vitória - ES",
+    etapaObra: "Fundações",
+    status: "Ativo",
+    imagens: [
+      "/imagens/helena1.jpg",
+      "/imagens/helena2.jpg",
+    ],
+    descricao: "Empreendimento moderno em localização privilegiada com design sofisticado e alto potencial de valorização.",
   },
+
+  // Exemplo para segundo empreendimento
   {
-    id: "ilha",
-    nome: "Ilha do Boi Exclusive",
-    precoToken: 200,
-    totalTokens: 3000,
-    tokensVendidos: 500,
-    retornoAnual: "15%",
-    indiceCorrecao: "IGP-M + 4%",
-    descricao: "Casas de alto padrão na Ilha do Boi com vista privilegiada.",
+    id: "boavista",
+    nome: "Residencial Boa Vista",
+    precoToken: 150,
+    quantidadeTotalTokens: 8000,
+    percentualRetornoAnual: 10,
+    percentualM2: 4,
+    chavePix: "boavista.pix@banco.com",
+    taxId: "11111111000188",
+    nomeRecebedor: "Boa Vista Construtora LTDA",
+    cnpj: "11.111.111/0001-88",
+    cidade: "Serra - ES",
+    etapaObra: "Lançamento",
+    status: "Em breve",
+    imagens: [
+      "/imagens/boavista1.jpg",
+    ],
+    descricao: "Oportunidade de investimento com liquidez, ótimo custo-benefício e alta atratividade regional.",
   },
 ];
