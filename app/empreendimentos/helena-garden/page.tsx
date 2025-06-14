@@ -58,7 +58,7 @@ useEffect(() => {
             <li>Remuneração trimestral via wallet</li>
             <li className="font-semibold">Tokens disponíveis: {tokensDisponiveis}</li>
           </ul>
-          {tokensDisponiveis > 0 ? (
+          {tokensDisponiveis !== null && tokensDisponiveis > 0 ? (
   <a
     href={`/conversao?id=${empreendimentoData.id}`}
     className="inline-block mt-4 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-center"

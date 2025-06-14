@@ -1,26 +1,32 @@
 // data/empreendimentos.ts
 
-export const empreendimentos = [
+import { Empreendimento } from "@/types/empreendimento";
+
+export const empreendimentos: Empreendimento[] = [
   {
     id: "helena",
     nome: "Helena Garden",
-    precoToken: 10, // Valor unitário do token
-    quantidadeTotalTokens: 5000, // Estoque total
-    retornoAnual: 12, // Retorno prometido ao investidor
-    indiceCorrecao: IPCA + 5,
-    percentualM2: 5, // Comissão da M2 Tokenizada (em %)
-    chavePix: "helena.pix@banco.com.br", // Chave PIX da SPE
-    taxId: "12345678000199", // CNPJ da SPE (sem pontuação)
-    nomeRecebedor: "Helena SPE LTDA", // Nome legal da SPE (aparece no comprovante)
-    cnpj: "12.345.678/0001-99", // Para exibição administrativa
+    precoToken: 10,
+    quantidadeTotalTokens: 5000,
+    tokensDisponiveis: 1400, // ← adicionado controle de estoque atual
+    retornoAnual: 12,
+    retornoNumerico: 12, // ← usado para simulação
+    investimentoMinimo: 3000, // ← valor mínimo para investir
+    indiceCorrecao: "IPCA", // ← convertido de número para string
+    percentualM2: 5,
+    chavePix: "helena.pix@banco.com.br",
+    taxId: "12345678000199",
+    nomeRecebedor: "Helena SPE LTDA",
+    cnpj: "12.345.678/0001-99",
     cidade: "Vitória - ES",
     etapaObra: "Fundações",
     status: "Ativo",
     imagens: [
       "/imagens/helena1.jpg",
-      "/imagens/helena2.jpg",
+      "/imagens/helena2.jpg"
     ],
-    descricao: "Empreendimento moderno em localização privilegiada com design sofisticado e alto potencial de valorização.",
+    mapa: "/mapas/helena.png", // ← novo campo
+    descricao: "Empreendimento moderno em localização privilegiada com design sofisticado e alto potencial de valorização."
   },
 
   {
@@ -28,8 +34,11 @@ export const empreendimentos = [
     nome: "Residencial Boa Vista",
     precoToken: 150,
     quantidadeTotalTokens: 8000,
+    tokensDisponiveis: 8000, // ← novo campo, começa cheio
     retornoAnual: 10,
-    indiceCorrecao: IPCA + 5,
+    retornoNumerico: 10,
+    investimentoMinimo: 2000,
+    indiceCorrecao: "CDI",
     percentualM2: 4,
     chavePix: "boavista.pix@banco.com",
     taxId: "11111111000188",
@@ -39,8 +48,9 @@ export const empreendimentos = [
     etapaObra: "Lançamento",
     status: "Em breve",
     imagens: [
-      "/imagens/boavista1.jpg",
+      "/imagens/boavista1.jpg"
     ],
-    descricao: "Oportunidade de investimento com liquidez, ótimo custo-benefício e alta atratividade regional.",
-  },
+    mapa: "/mapas/boavista.png",
+    descricao: "Oportunidade de investimento com liquidez, ótimo custo-benefício e alta atratividade regional."
+  }
 ];
