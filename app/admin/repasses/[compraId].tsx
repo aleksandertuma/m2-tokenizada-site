@@ -88,14 +88,14 @@ export default function RepassesPage() {
       <h1 className="text-2xl font-bold mb-4">Repasses Registrados</h1>
 
       <div className="flex gap-4 mb-6">
-        <Select onChange={(e) => setStatusFiltro(e.target.value)} defaultValue="todos">
+        <Select onChange={e => setStatusFiltro(e.target.value)} defaultValue="todos">
           <option value="todos">Todos</option>
           <option value="concluido">Concluídos</option>
           <option value="pendente">Pendentes</option>
           <option value="falhou">Falhos</option>
         </Select>
 
-        <Select onChange={(e) => setEmpreendimentoFiltro(e.target.value)} defaultValue="todos">
+        <Select onChange={e => setEmpreendimentoFiltro(e.target.value)} defaultValue="todos">
           <option value="todos">Todos os Empreendimentos</option>
           {empreendimentosUnicos.map(emp => (
             <option key={emp} value={emp}>{emp}</option>
