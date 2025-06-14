@@ -55,7 +55,6 @@ useEffect(() => {
           <ul className="list-disc pl-5 text-sm text-gray-700 space-y-1">
             <li>Rentabilidade esperada: {empreendimentoData.retornoAnual}</li>
             <li>Valor do token: R$ {empreendimentoData.precoToken.toFixed(2)}</li>
-            <li>Investimento mínimo: R$ {empreendimentoData.investimentoMinimo}</li>
             <li>Remuneração trimestral via wallet</li>
             <li className="font-semibold">Tokens disponíveis: {tokensDisponiveis}</li>
           </ul>

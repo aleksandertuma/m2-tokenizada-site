@@ -6,7 +6,8 @@ export const empreendimentos = [
     nome: "Helena Garden",
     precoToken: 10, // Valor unitário do token
     quantidadeTotalTokens: 5000, // Estoque total
-    percentualRetornoAnual: 12, // Retorno prometido ao investidor
+    retornoAnual: 12, // Retorno prometido ao investidor
+    indiceCorrecao: IPCA + 5,
     percentualM2: 5, // Comissão da M2 Tokenizada (em %)
     chavePix: "helena.pix@banco.com.br", // Chave PIX da SPE
     taxId: "12345678000199", // CNPJ da SPE (sem pontuação)
@@ -27,7 +28,8 @@ export const empreendimentos = [
     nome: "Residencial Boa Vista",
     precoToken: 150,
     quantidadeTotalTokens: 8000,
-    percentualRetornoAnual: 10,
+    retornoAnual: 10,
+    indiceCorrecao: IPCA + 5,
     percentualM2: 4,
     chavePix: "boavista.pix@banco.com",
     taxId: "11111111000188",

@@ -4,7 +4,8 @@ export interface Empreendimento {
   descricao: string;
   precoToken: number;
   quantidadeTotalTokens: number;
-  percentualRetornoAnual: number;
+  retornoAnual: number;
+  indiceCorrecao: string;
   percentualM2: number;
   chavePix: string;
   taxId: string;
