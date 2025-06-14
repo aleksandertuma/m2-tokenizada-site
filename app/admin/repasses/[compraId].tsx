@@ -4,7 +4,7 @@ import { db } from "@/lib/firebase";
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Select } from "@/components/ui/select";
+import { Select } from "@/components/ui/Select";
 import { Button } from "@/components/ui/Button";
 import { repassarPix } from "@/lib/banco/starkbank";
 import { registrarLogRepasse } from "@/lib/logs/logsRepasses";
