@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { empreendimentos } from "@/data/empreendimentos";
-import { sendEmail } from "@/lib/sendEmail";
+import { sendEmailRelatorio } from "@/lib/emails/sendEmailRelatorio";
 
 export async function GET() {
   try {
@@ -46,7 +46,7 @@ export async function GET() {
 
       html += `</ul><p>Este é um valor estimado com base no retorno informado. Em caso de dúvida, entre em contato com nossa equipe.</p>`;
 
-      await sendEmail({
+      await sendEmailRelatorio({
         nome,
         email,
         assunto: "Relatório Trimestral de Rendimento",
