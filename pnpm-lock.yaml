@@ -57,8 +57,8 @@ importers:
         specifier: ^2.15.3
         version: 2.15.3(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       starkbank:
-        specifier: 2.31.0
-        version: 2.31.0
+        specifier: 2.30.0
+        version: 2.30.0
       tailwindcss:
         specifier: ^3.3.2
         version: 3.4.17
@@ -1232,8 +1232,8 @@ packages:
   starkbank-ecdsa@1.1.5:
     resolution: {integrity: sha512-5O9CJ0QF6pTrtDg6dmaHy1GC/2wA1tcXsYanWOCzg+2cZrCDylEvEl6krzI4Zy8ryar00lHErRTT2Q61w/MUVA==}
 
-  starkbank@2.31.0:
-    resolution: {integrity: sha512-qrzvBSWWdpbRqRsM7c4Hf0EBkgVYTwaUlXnASTjjwMFGx/GZUMecuW2/HV65V1fBgdJu3vzVpgce1hF7ubjSNw==}
+  starkbank@2.30.0:
+    resolution: {integrity: sha512-m4AE8FY3D2MYmT5LiBGwR2jK8ZaBak3772kMaiS+hN4Ur2E4Khrb9G6CrnKAIXuv/bhbqWnGO/7QFI/CVK7utA==}
 
   starkcore@0.1.4:
     resolution: {integrity: sha512-hqbqsl8YzvvDNQKIFduemgwxYOueLGIHEhCZNhzzS7s67OmctgBxuucboo1ETLoC1KERMy65ux7eTwdn309tAg==}
@@ -2649,7 +2649,7 @@ snapshots:
       big-integer: 1.6.52
       js-sha256: 0.9.0
 
-  starkbank@2.31.0:
+  starkbank@2.30.0:
     dependencies:
       axios: 1.9.0
       starkbank-ecdsa: 1.1.5

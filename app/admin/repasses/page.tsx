@@ -6,7 +6,7 @@ import { db } from "@/lib/firebase";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Select } from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import { repassarPix } from "@/lib/banco/starkbank";
 import { registrarLogRepasse } from "@/lib/logs/logsRepasses";
 import Papa from "papaparse";
