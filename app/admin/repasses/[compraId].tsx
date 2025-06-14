@@ -4,7 +4,7 @@ import { db } from "@/lib/firebase";
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Select } from "@/components/ui/Select";
+import { select } from "@/components/ui/select";
 import { Button } from "@/components/ui/Button";
 import { repassarPix } from "@/lib/banco/starkbank";
 import { registrarLogRepasse } from "@/lib/logs/logsRepasses";
@@ -88,7 +88,7 @@ export default function RepassesPage() {
       <h1 className="text-2xl font-bold mb-4">Repasses Registrados</h1>
 
       <div className="flex gap-4 mb-6">
-        <Select onValueChange={setStatusFiltro} defaultValue="todos">
+        <Select onChange={(e) => setStatusFiltro(e.target.value)} defaultValue="todos">
           <option value="todos">Todos</option>
           <option value="concluido">Concluídos</option>
           <option value="pendente">Pendentes</option>
